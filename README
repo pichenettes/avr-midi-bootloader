@@ -1,0 +1,36 @@
+No dependency version of the Mutable Instruments MIDI bootloader for AVR.
+
+Things to mess with:
+* Path to the avr toolchain and avrdude in base/makefile.mk (TOOLCHAIN_PATH = )
+* Programmer name in base/makefile.mk (PROGRAMMER = ). The programmer is expected to be connected to USB.
+* External quartz frequency in base/makefile.mk (F_CPU = ).
+* MCU type in bootloader/makefile (MCU_NAME = )
+* Start address of bootloader code in the "text=0xfc00" line of bootloader/makefile. For example, ATMega644p flash size = 64k - 1k large bootloader => start address of 63k = 0xfc00.
+* MCU fuses in bootloader/makefile
+* I/O code for displaying LED patterns and deciding whether or not to enter the bootloader RX mode in bootloader/bootloader.c
+
+
+Setting up the fuses
+--------------------
+
+make -f bootloader/makefile fuses
+
+
+Building the bootloader
+-----------------------
+
+make -f bootloader/makefile
+
+
+Uploading the bootloader code to the MCU
+----------------------------------------
+
+make -f bootloader/makefile upload
+
+
+Producing a SysEx file from a firmware .hex
+-------------------------------------------
+
+python tools/hex2sysex/hex2sysex.py --syx -o firmware.syx firmware.hex
+
+Check python tools/hex2sysex/hex2sysex.py -help for more options. In particular, you can change the page size which is configured, by default, to 128 bytes (ATMega644p and 1284p). To know the page size (in words) of a specific device, look up the value of SPM_PAGE_SIZE.

@@ -1,0 +1,5 @@
+# Precompiled python modules
+*.pyc
+
+# OS X crap
+.DS_Stor?

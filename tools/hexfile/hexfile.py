@@ -58,7 +58,7 @@ def LoadHexFile(lines):
       address = bytes[1] << 8 | bytes[2]
       padding_size = address + bytes[0] - len(data)
       if padding_size > 0:
-        data += ['\x00'] * padding_size
+        data += [0] * padding_size
       data[address:address + bytes[0]] = bytes[4:-1]
   return data
 

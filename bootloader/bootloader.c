@@ -26,7 +26,7 @@
 #include <avr/pgmspace.h>
 
 uint16_t page = 0;
-uint8_t rx_buffer[2 * (SPM_PAGESIZE + 1)];
+uint8_t rx_buffer[SPM_PAGESIZE + 1];
 
 void (*main_entry_point)(void) = 0x0000;
 

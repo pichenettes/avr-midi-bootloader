@@ -64,7 +64,7 @@ def CreateMidifile(
       m.AddTrack().AddEvent(0, midifile.TextEvent(comment))
   t = m.AddTrack()
   t.AddEvent(0, midifile.TempoEvent(120.0))
-  page_size *= 2  # Converts from words to bytes
+
   # The first SysEx block must not start at 0! Sequencers like Logic play the
   # first SysEx block everytime stop/play is pressed.
   time = 1
@@ -105,8 +105,8 @@ if __name__ == '__main__':
       '--page_size',
       dest='page_size',
       type='int',
-      default=128,
-      help='Flash page size in words')
+      default=256,
+      help='Flash page size in bytes')
   parser.add_option(
       '-d',
       '--delay',

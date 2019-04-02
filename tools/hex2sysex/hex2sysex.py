@@ -1,8 +1,8 @@
 #!/usr/bin/python2.5
 #
-# Copyright 2009 Olivier Gillet.
+# Copyright 2009 Emilie Gillet.
 #
-# Author: Olivier Gillet (ol.gillet@gmail.com)
+# Author: Emilie Gillet (emilie.o.gillet@gmail.com)
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -64,7 +64,7 @@ def CreateMidifile(
       m.AddTrack().AddEvent(0, midifile.TextEvent(comment))
   t = m.AddTrack()
   t.AddEvent(0, midifile.TempoEvent(120.0))
-
+  page_size *= 2  # Converts from words to bytes
   # The first SysEx block must not start at 0! Sequencers like Logic play the
   # first SysEx block everytime stop/play is pressed.
   time = 1
@@ -105,8 +105,8 @@ if __name__ == '__main__':
       '--page_size',
       dest='page_size',
       type='int',
-      default=256,
-      help='Flash page size in bytes')
+      default=128,
+      help='Flash page size in words')
   parser.add_option(
       '-d',
       '--delay',
@@ -139,7 +139,7 @@ if __name__ == '__main__':
       '--device_id',
       dest='device_id',
       type='int',
-      default=127,
+      default=2,
       help='Device ID to use in SysEx message')
   parser.add_option(
       '-u',
